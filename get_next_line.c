@@ -64,6 +64,7 @@ char	*get_next_line(int fd)
 	char		*str;
 	int			x;
 
+	keep = NULL;
 	str = NULL;
 	if (fd < 0)
 		return (NULL);
