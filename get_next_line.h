@@ -5,7 +5,7 @@
 
 char	*get_next_line(int fd);
 char	*ft_copy(char *str);
-char	*ft_del_content(char *str);
+void	ft_del_content(char *str);
 char	*ft_check_new_line(char *str, int fd);
 int		ft_did_have_a_nl(char *str);
 char	*ft_cpy_and_increase(char *str);

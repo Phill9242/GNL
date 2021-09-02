@@ -27,7 +27,7 @@ int	ft_strlen(char *s)
 	return (x);
 }
 
-char	*ft_del_content(char *str)
+void	ft_del_content(char *str)
 {
 	int	i;
 
@@ -35,8 +35,6 @@ char	*ft_del_content(char *str)
 	while (str[++i])
 		str[i] = 0;
 	free (str);
-	str = NULL;
-	return ((char *)str);
 }
 
 char	*ft_split_rtn(char *str, char *keep)
@@ -59,8 +57,6 @@ char	*ft_split_rtn(char *str, char *keep)
 	rtn[i] = str[i];
 	while (str[++i])
 		keep[j++] = str[i];
-	if (keep)
-		keep [j] = 0;
 	str = ft_del_content (str);
 	return (rtn);
 }

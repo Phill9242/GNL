@@ -5,12 +5,14 @@ char	*ft_copy(char *str)
 	int		i;
 	char	*rtn;
 
-	i = -1;
+	i =0;
 	rtn = ft_calloc ((ft_strlen(str) + 1), sizeof(char));
-	while (str[++i])
+	while (str[i])
+	{
 		rtn[i] = str[i];
-	rtn[i] = 0;
-	str = ft_del_content(str);
+		i++;
+	}
+	ft_del_content(str);
 	return (rtn);
 }
 
@@ -72,7 +74,7 @@ char	*get_next_line(int fd)
 		x = read (fd, (void *)str, BUFFER_SIZE);
 		if (x == -1 || !x)
 		{
-			str = ft_del_content(str);
+			ft_del_content(str);
 			return (NULL);
 		}
 	}
