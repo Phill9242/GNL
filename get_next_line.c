@@ -60,11 +60,10 @@ char	*ft_alloc_for_keep(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*keep;
+	static char	*keep = NULL;
 	char		*str;
 	int			x;
 
-	keep = NULL;
 	str = NULL;
 	if (fd < 0)
 		return (NULL);
