@@ -57,7 +57,7 @@ char	*ft_split_rtn(char *str, char *keep)
 	rtn[i] = str[i];
 	while (str[++i])
 		keep[j++] = str[i];
-	str = ft_del_content (str);
+	ft_del_content (str);
 	return (rtn);
 }
 
@@ -70,6 +70,6 @@ char	*ft_cpy_and_increase(char *str)
 	rtn = ft_calloc ((ft_strlen(str) + BUFFER_SIZE + 1), sizeof(char));
 	while (str[++i])
 		rtn[i] = str[i];
-	str = ft_del_content (str);
+	ft_del_content (str);
 	return (rtn);
 }
