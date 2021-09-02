@@ -47,6 +47,8 @@ char	*ft_split_rtn(char *str, char *keep)
 	j = 0;
 	while (str[i] != '\n' && str[i])
 		i++;
+	if (str[i] == '\n')
+		i++;
 	rtn = ft_calloc ((i + 1), sizeof(char));
 	i = 0;
 	while (str[i] != '\n' && str[i])
