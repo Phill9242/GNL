@@ -29,15 +29,12 @@ int	ft_did_have_a_nl(char *str)
 char	*ft_check_new_line(char *str, int fd)
 {
 	int	read_size;
-	int	str_len;
 
 	read_size = 1;
 	while (!(ft_did_have_a_nl(str)))
 	{
 		str = ft_cpy_and_increase(str);
-		str_len = ft_strlen(str);
-		read_size = read (fd, &str[str_len], BUFFER_SIZE);
-		str[str_len + BUFFER_SIZE] = 0;
+		read_size = read (fd, &str[ft_strlen(str)], BUFFER_SIZE);
 		if (!read_size)
 			return (str);
 	}
@@ -65,7 +62,7 @@ char	*get_next_line(int fd)
 	int			x;
 
 	str = NULL;
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (keep)
 		str = ft_copy(keep);
@@ -78,7 +75,6 @@ char	*get_next_line(int fd)
 			str = ft_del_content(str);
 			return (NULL);
 		}
-		str[ft_strlen(str)] = 0;
 	}
 	str = ft_check_new_line(str, fd);
 	keep = ft_alloc_for_keep(str);
