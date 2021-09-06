@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_calloc(int count, int size)
 {
@@ -14,21 +14,6 @@ char	*ft_calloc(int count, int size)
 		rtn[i] = '\0';
 		i++;
 	}
-	return (rtn);
-}
-
-
-char	*ft_alloc_for_keep(char *str)
-{
-	char	*rtn;
-	int		i;
-
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	if (!str[i] || (str[i] == '\n' && !str[i + 1]))
-		return (NULL);
-	rtn = ft_calloc ((ft_strlen(str) - i), sizeof(char));
 	return (rtn);
 }
 
@@ -74,6 +59,19 @@ char	*ft_split_rtn(char *str, char *keep)
 	rtn[i] = str[i];
 	while (str[++i])
 		keep[j++] = str[i];
+	ft_del_content (str);
+	return (rtn);
+}
+
+char	*ft_cpy_and_increase(char *str)
+{
+	int		i;
+	char	*rtn;
+
+	i = -1;
+	rtn = ft_calloc ((ft_strlen(str) + BUFFER_SIZE + 1), sizeof(char));
+	while (str[++i])
+		rtn[i] = str[i];
 	ft_del_content (str);
 	return (rtn);
 }

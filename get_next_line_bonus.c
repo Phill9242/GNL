@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_copy(char *str)
 {
@@ -43,31 +43,31 @@ char	*ft_check_new_line(char *str, int fd)
 	return (str);
 }
 
-char	*ft_cpy_and_increase(char *str)
+char	*ft_alloc_for_keep(char *str)
 {
-	int		i;
 	char	*rtn;
+	int		i;
 
-	i = -1;
-	rtn = ft_calloc ((ft_strlen(str) + BUFFER_SIZE + 1), sizeof(char));
-	while (str[++i])
-		rtn[i] = str[i];
-	ft_del_content (str);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (!str[i] || (str[i] == '\n' && !str[i + 1]))
+		return (NULL);
+	rtn = ft_calloc ((ft_strlen(str) - i), sizeof(char));
 	return (rtn);
 }
 
-
 char	*get_next_line(int fd)
 {
-	static char	*keep = NULL;
+	static char	*keep[OPEN_MAX];
 	char		*str;
 	int			x;
 
 	str = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (keep)
-		str = ft_copy(keep);
+	if (keep[fd])
+		str = ft_copy(keep[fd]);
 	else
 	{
 		str = ft_calloc ((BUFFER_SIZE + 1), sizeof(char));
@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 		}
 	}
 	str = ft_check_new_line(str, fd);
-	keep = ft_alloc_for_keep(str);
-	str = ft_split_rtn(str, keep);
+	keep[fd] = ft_alloc_for_keep(str);
+	str = ft_split_rtn(str, keep[fd]);
 	return (str);
 }
